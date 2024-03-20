@@ -1,9 +1,26 @@
 import React, { useState } from "react";
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon, FormInput, FormSelect, FormRadio } from 'semantic-ui-react';
-
+import axios from "axios";
 
 export default function FormEntregador() {
+
+    const [nome, setNome] = useState();
+    const [cpf, setCpf] = useState();
+    const [rg, setRg] = useState();
+    const [dataNascimento, setDataNascimento] = useState();
+    const [foneCelular, setFoneCelular] = useState();
+    const [foneFixo, setFoneFixo] = useState();
+    const [qtdEntregasRealizadas, setQtdEntregasRealizadas] = useState();
+    const [valorFrete, setValorFrete] = useState();
+    const [enderecoRua, setEnderecoRua] = useState();
+    const [enderecoNumero, setEnderecoNumero] = useState();
+    const [enderecoBairro, setEnderecoBairro] = useState();
+    const [enderecoCidade, setEnderecoCidade] = useState();
+    const [enderecoCep, setEnderecoCep] = useState();
+    const [enderecoUf, setEnderecoUf] = useState();
+    const [enderecoComplemento, setEnderecoComplemento] = useState();
+    const [ativo, setAtivo] = useState();
 
     const Estados = [
         { key: 'ac', text: 'Acre', value: 'ac' },
@@ -37,15 +54,50 @@ export default function FormEntregador() {
 
     const [value, setValue] = useState("");
 
+
     const handleChange = (e, { value }) => { setValue(value); };
 
+
+
+    function salvar() {
+
+        let EntregadorRequest = {
+            nome: nome,
+            cpf: cpf,
+            rg: rg,
+            dataNascimento: dataNascimento,
+            foneCelular: foneCelular,
+            foneFixo: foneFixo,
+            dataNascimento: dataNascimento,
+            foneCelular: foneCelular,
+            foneFixo: foneFixo,
+            qtdEntregasRealizadas: qtdEntregasRealizadas,
+            valorFrete: valorFrete,
+            enderecoRua: enderecoRua,
+            enderecoNumero: enderecoNumero,
+            enderecoBairro: enderecoBairro,
+            enderecoCidade: enderecoCidade,
+            enderecoCep: enderecoCep,
+            enderecoUf: enderecoUf,
+            enderecoComplemento: enderecoComplemento,
+            ativo: ativo,
+        }
+
+        axios.post("http://localhost:8081/api/entregador", EntregadorRequest)
+            .then((response) => {
+                console.log('Entregador cadastrado com sucesso.')
+            })
+            .catch((error) => {
+                console.log('Erro ao incluir o um entregador.')
+            })
+    }
 
     return (
 
         <div>
             <div style={{ marginTop: '3%' }}>
                 <Container textAlign="justified">
-                    <h2> <span> Produto &nbsp; <Icon name="angle double right" size="small" >  </Icon> </span> Cadastro </h2>
+                    <h2> <span> Entregador &nbsp; <Icon name="angle double right" size="small" >  </Icon> </span> Cadastro </h2>
 
                     <Divider></Divider>
                     <div>
@@ -58,6 +110,8 @@ export default function FormEntregador() {
                                     required
                                     maxLength='100'
                                     width={15}
+                                    value={nome}
+                                    onChange={e => setNome(e.target.value)}
                                 >
                                 </FormInput>
 
@@ -66,6 +120,8 @@ export default function FormEntregador() {
                                     required
                                     width={6}
                                     maxLength='11'
+                                    value={cpf}
+                                    onChange={e => setCpf(e.target.value)}
                                 >
                                     <InputMask
                                         required
@@ -76,6 +132,8 @@ export default function FormEntregador() {
                                 <FormInput
                                     label='RG'
                                     width={6}
+                                    value={rg}
+                                    onChange={e => setRg(e.target.value)}
                                 >
                                 </FormInput>
                             </Form.Group>
@@ -83,148 +141,176 @@ export default function FormEntregador() {
                             <Form.Group>
                                 <FormInput
                                     label='DT Nascimento'
-                                    placeholder='Ex: 01/01/0101'
+
                                     width={3}
                                 >
-
-                                </FormInput>
-                                <FormInput
-                                    label='Fone Celular'
-                                    required
-                                    fluid
-                                    width={4}
-
-                                >
-
-                                </FormInput>
-                                <FormInput
-                                    label='Fone Fixo'
-                                    fluid
-                                    width={4}
-                                >
-
-                                </FormInput>
-                                <FormInput
-                                    label='DT QTD Entregas Realizadas'
-                                    fluid
-                                    width={3}
-                                >
-
-                                </FormInput>
-                                <FormInput
-                                    label='Valor Por Frete '
-                                    fluid
-                                    width={3}
-                                >
-                                </FormInput>
-
-                            </Form.Group>
-
-                            <Form.Group>
-                                <FormInput
-                                    label='Rua'
-                                    width={15}
-
-                                >
-                                </FormInput>
-                                <FormInput
-                                    label='Número'
-
-                                >
-                                </FormInput>
-                            </Form.Group>
-
-                            <Form.Group>
-                                <FormInput
-                                    label='Bairro'
-                                    width={7}
-                                >
-
-                                </FormInput>
-                                <FormInput
-                                    label='Cidade'
-                                    width={7}
-                                >
-                                </FormInput>
-                                <FormInput
-                                    label='CEP'
-                                    width={3}
-
-                                >
-                                </FormInput>
-                            </Form.Group>
+                                   <InputMask
+                                    mask="99/99/9999"
+                                    maskChar={null}
+                                    placeholder="Ex: 20/03/1985"
+                                    value={dataNascimento}
+                                    onChange={e => setDataNascimento(e.target.value)}
+                                />
 
 
 
-                            <FormSelect
 
-                                label='UF'
-                                options={Estados}
-                                placeholder="selecione"
-                                width='18'
-                            >
-                            </FormSelect>
-
+                            </FormInput>
                             <FormInput
-                                label='Complemento'
+                                label='Fone Celular'
+                                required
+                                fluid
+                                width={4}
+                                value={foneCelular}
+                                onChange={e => setFoneCelular(e.target.value)}
 
+                            >
+
+                            </FormInput>
+                            <FormInput
+                                label='Fone Fixo'
+                                fluid
+                                width={4}
+                                value={foneFixo}
+                                onChange={e => setFoneFixo(e.target.value)}
+                            >
+
+                            </FormInput>
+                            <FormInput
+                                label='DT QTD Entregas Realizadas'
+                                fluid
+                                width={3}
+                                value={qtdEntregasRealizadas}
+                                onChange={e => setQtdEntregasRealizadas(e.target.value)}
+                            >
+
+                            </FormInput>
+                            <FormInput
+                                label='Valor Por Frete '
+                                fluid
+                                width={3}
+                                value={valorFrete}
+                                onChange={e => setValorFrete(e.target.value)}
                             >
                             </FormInput>
 
-                            <Form.Group inline>
-                                <label style={{ backgroundColor: 'branco' }}>Ativo</label>
+                        </Form.Group>
 
-                                <FormRadio
-                                    label='Sim'
-                                    value={'sim'}
-                                    checked={value === 'sim'}
-                                    onChange={handleChange}
-
-                                />
-
-                                <FormRadio
-                                    label='Não'
-                                    value={'não'}
-                                    checked={value === 'não'}
-                                    onChange={handleChange}
-
-                                />
-
-
-                            </Form.Group>
-                        </Form>
-                        <div style={{ marginTop: '4%' }}>
-
-                            <Button
-                                type="button"
-                                inverted
-                                circular
-                                icon
-                                labelPosition='left'
-                                color='orange'
+                        <Form.Group>
+                            <FormInput
+                                label='Rua'
+                                width={15}
+                                value={enderecoRua}
+                                onChange={e => setEnderecoRua(e.target.value)}
                             >
-                                <Icon name='reply' />
-                                Listar
-                            </Button>
-
-                            <Button
-                                inverted
-                                circular
-                                icon
-                                labelPosition='left'
-                                color='blue'
-                                floated='right'
+                            </FormInput>
+                            <FormInput
+                                label='Número'
+                                value={enderecoNumero}
+                                onChange={e => setEnderecoNumero(e.target.value)}
                             >
-                                <Icon name='save' />
-                                Salvar
-                            </Button>
+                            </FormInput>
+                        </Form.Group>
 
-                        </div>
+                        <Form.Group>
+                            <FormInput
+                                label='Bairro'
+                                width={7}
+                                value={enderecoBairro}
+                                onChange={e => setEnderecoBairro(e.target.value)}
+                            >
+
+                            </FormInput>
+                            <FormInput
+                                label='Cidade'
+                                width={7}
+                                value={enderecoCidade}
+                                onChange={e => setEnderecoCidade(e.target.value)}
+                            >
+                            </FormInput>
+                            <FormInput
+                                label='CEP'
+                                width={3}
+                                value={enderecoCep}
+                                onChange={e => setEnderecoCep(e.target.value)}
+                            >
+                            </FormInput>
+                        </Form.Group>
+
+                        <FormSelect
+
+                            label='UF'
+                            options={Estados}
+                            placeholder="selecione"
+                            width={16}
+                            value={enderecoUf}
+                            onChange={e => setEnderecoUf(e.target.value)}
+                        >
+                        </FormSelect>
+
+                        <FormInput
+                            label='Complemento'
+                            value={enderecoComplemento}
+                            onChange={e => setEnderecoComplemento(e.target.value)}
+                        >
+                        </FormInput>
+
+                        <Form.Group inline>
+                            <label style={{ backgroundColor: 'branco' }}>Ativo</label>
+
+                            <FormRadio
+                                label='Sim'
+                                value={'sim'}
+                                checked={value === 'sim'}
+                                onChange={handleChange}
+                                //onChange={e => setAtivo(e.target.value)}
+
+                            />
+
+                            <FormRadio
+                                label='Não'
+                                value={'não'}
+                                checked={value === 'não'}
+                                onChange={handleChange}
+
+                            />
+
+
+                        </Form.Group>
+                    </Form>
+                    <div style={{ marginTop: '4%' }}>
+
+                        <Button
+                            type="button"
+                            inverted
+                            circular
+                            icon
+                            labelPosition='left'
+                            color='orange'
+                        >
+                            <Icon name='reply' />
+                            Listar
+                        </Button>
+
+                        <Button
+                            inverted
+                            circular
+                            icon
+                            labelPosition='left'
+                            color='blue'
+                            floated='right'
+                            onClick={() => salvar()}
+                        >
+                            <Icon name='save' />
+                            Salvar
+                        </Button>
 
                     </div>
-                </Container>
+
             </div>
-        </div>
+        </Container>
+            </div >
+        </div >
 
     );
 
