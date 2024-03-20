@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon, FormInput, FormSelect, FormRadio } from 'semantic-ui-react';
 import axios from "axios";
+import MenuSistema from '../../MenuSistema';
 
 export default function FormEntregador() {
 
@@ -68,9 +69,7 @@ export default function FormEntregador() {
             dataNascimento: dataNascimento,
             foneCelular: foneCelular,
             foneFixo: foneFixo,
-            dataNascimento: dataNascimento,
             foneCelular: foneCelular,
-            foneFixo: foneFixo,
             qtdEntregasRealizadas: qtdEntregasRealizadas,
             valorFrete: valorFrete,
             enderecoRua: enderecoRua,
@@ -95,6 +94,7 @@ export default function FormEntregador() {
     return (
 
         <div>
+            <MenuSistema tela={'Entregador'} />
             <div style={{ marginTop: '3%' }}>
                 <Container textAlign="justified">
                     <h2> <span> Entregador &nbsp; <Icon name="angle double right" size="small" >  </Icon> </span> Cadastro </h2>
