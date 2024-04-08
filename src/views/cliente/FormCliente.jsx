@@ -172,6 +172,7 @@ export default function FormCliente() {
 
                             >
                                 <Icon name='reply' />
+                                <Link to={'/list-cliente'}>Voltar</Link>
                                 Voltar
                             </Button>
 

@@ -92,7 +92,6 @@ export default function FormEntregador() {
             rg: rg,
             dataNascimento: dataNascimento,
             foneCelular: foneCelular,
-            foneFixo: foneFixo,
             qtdEntregasRealizadas: qtdEntregasRealizadas,
             valorFrete: valorFrete,
             enderecoRua: enderecoRua,

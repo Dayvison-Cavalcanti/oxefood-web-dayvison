@@ -10,6 +10,7 @@ function App() {
    <div className="App">
     
     <Rotas />
+    <Rotas />
 
      <div style={{marginTop: '6%'}}>
        <Segment vertical color='grey' size='tiny' textAlign='center'>
